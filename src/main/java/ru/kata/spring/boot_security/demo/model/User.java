@@ -4,11 +4,13 @@ package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -26,7 +28,7 @@ public class User implements UserDetails {
     @Column(name = "city")
     private String city;
 
-    @Column(unique = true,name = "username")
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password")
@@ -36,18 +38,19 @@ public class User implements UserDetails {
     @JoinTable(name = "userrole",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Set<Roles> roles;
 
     public User() {}
 
-
-    public User(String username, String city, String password) {
-        this.username = username;
+public User(String name, String surname, String city, String username) {
+        this.name = name;
+        this.surname = surname;
         this.city = city;
-        this.password = password;
-    }
+        this.username = username;
+}
 
-        public void setUsername(String username) {
+
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -79,22 +82,21 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
-    public Collection<Role> getRoles() {
+    public Set<Roles> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

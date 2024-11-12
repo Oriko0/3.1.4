@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
+public class Roles implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,7 +21,11 @@ public class Role implements GrantedAuthority {
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
 
-    public Role() {}
+    public Roles() {}
+    public Roles(String roleType) {
+        this.roleType = roleType;
+    }
+
 
 
     public Integer getId() {
@@ -62,7 +66,7 @@ public class Role implements GrantedAuthority {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
+        Roles role = (Roles) o;
         return Objects.equals(getId(), role.getId()) && Objects.equals(getRoleType(), role.getRoleType()) && Objects.equals(getUsers(), role.getUsers());
     }
 

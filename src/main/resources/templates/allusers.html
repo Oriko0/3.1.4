@@ -23,12 +23,12 @@
         <td th:utext="${user.city}"></td>
         <td th:utext="${user.roles}"></td>
         <td>
-            <form th:action="@{/addNewUpdateUser}">
+            <form th:action="@{/admin/addNewUpdateUser}">
                 <button type="submit" th:name="usrId" th:value="${user.id}">Update</button>
             </form>
         </td>
         <td>
-            <form th:action="@{/deleteUser}">
+            <form th:action="@{/admin/deleteUser}">
                 <button type="submit" th:name="usrId" th:value="${user.id}">Delete</button>
             </form>
         </td>
@@ -37,7 +37,7 @@
 </table>
 <br>
 <input type="button" value="AddUser"
-       onclick="window.location.href = 'addNewUser'">
+       onclick="window.location.href = 'admin/addNewUser'">
 <br><br>
 <a th:href="@{logout}">Logout</a>
 </body>

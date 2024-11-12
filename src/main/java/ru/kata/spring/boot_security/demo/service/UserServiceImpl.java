@@ -51,9 +51,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateInfo(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public void updateInfo(User user,Integer id) {
+        User u = userRepository.getById(id);
+        u.setName(user.getName());
+        u.setSurname(user.getSurname());
+        u.setCity(user.getCity());
+        u.setUsername(user.getUsername());
+        u.setPassword(passwordEncoder.encode(user.getPassword()));
+        u.setRoles(user.getRoles());
+        userRepository.save(u);
     }
 
     @Override
@@ -66,4 +72,5 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findByUsername(username);
     }
+
 }
