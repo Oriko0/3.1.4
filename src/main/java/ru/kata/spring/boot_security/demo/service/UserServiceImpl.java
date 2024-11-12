@@ -15,6 +15,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -25,32 +26,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    @Transactional
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public User getUser(Integer id) {
         return userRepository.getById(id);
     }
 
     @Override
-    @Transactional
     public void deleteUser(Integer id) {
         userRepository.deleteById(id);
     }
 
     @Override
-    @Transactional
     public void updateInfo(User user,Integer id) {
         User u = userRepository.getById(id);
         u.setName(user.getName());
@@ -68,7 +64,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findByUsername(username);
     }

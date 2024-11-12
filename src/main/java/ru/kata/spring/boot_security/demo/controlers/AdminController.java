@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
@@ -19,14 +20,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
     private final UserService userService;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
+
     @Autowired
-    public AdminController(UserService userService, RoleRepository roleRepository, @Lazy PasswordEncoder passwordEncoder) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @GetMapping
@@ -38,7 +39,7 @@ public class AdminController {
     public String addNewUser(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        model.addAttribute("rolesUser", roleRepository.findAll());
+        model.addAttribute("rolesUser", roleService.getAllRoles());
         return "user-info";
     }
     @GetMapping("/saveUser")

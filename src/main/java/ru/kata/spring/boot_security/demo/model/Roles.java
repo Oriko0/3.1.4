@@ -11,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "roles")
 public class Roles implements GrantedAuthority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,11 +23,10 @@ public class Roles implements GrantedAuthority {
     private Collection<User> users;
 
     public Roles() {}
+
     public Roles(String roleType) {
         this.roleType = roleType;
     }
-
-
 
     public Integer getId() {
         return id;

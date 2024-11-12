@@ -10,10 +10,17 @@ import java.util.List;
 
 
 public interface UserService extends UserDetailsService {
+
     List<User> getAllUsers();
+
     void saveUser(User user);
+
     User getUser(Integer id);
+
     void deleteUser(Integer id);
+
     void updateInfo(User user,Integer id);
+
     User findByUsername(String username);
+
 }

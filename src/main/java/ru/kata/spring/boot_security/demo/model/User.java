@@ -42,12 +42,12 @@ public class User implements UserDetails {
 
     public User() {}
 
-public User(String name, String surname, String city, String username) {
+    public User(String name, String surname, String city, String username) {
         this.name = name;
         this.surname = surname;
         this.city = city;
         this.username = username;
-}
+    }
 
 
     public void setUsername(String username) {
