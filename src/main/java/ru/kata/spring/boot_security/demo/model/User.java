@@ -86,9 +86,9 @@ public class User implements UserDetails {
         return id;
     }
 
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Set<Roles> getRoles() {
         return roles;
@@ -118,6 +118,15 @@ public class User implements UserDetails {
                 ", surname='" + surname + '\'' +
                 ", city='" + city + '\'' +
                 '}';
+    }
+    public String getStringRoles(){
+        StringBuilder stringRoles = new StringBuilder();
+        roles
+                .stream()
+                .map(Roles::getRoleType)
+                .map(role -> role.replaceAll("ROLE_", ""))
+                .forEach(role -> stringRoles.append(role).append(" "));
+        return stringRoles.toString();
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -41,20 +41,16 @@ public class Init {
         if (userService.findByUsername("admin") == null) {
             User adminUser = new User("Tim","Tim","SPB","admin");
             Roles adminRole = roleService.getRoleByRoleType("ROLE_ADMIN");
-            Set<Roles> roles = new HashSet<>();
-            roles.add(adminRole);
-            adminUser.setRoles(roles);
+            String[] roles = {"ROLE_ADMIN"};
             adminUser.setPassword("admin");
-            userService.saveUser(adminUser);
+            userService.saveUser(adminUser,roles);
         }
         if (userService.findByUsername("user") == null) {
             User user = new User("Anton","Anton","SPB","user");
             Roles userRole = roleService.getRoleByRoleType("ROLE_USER");
-            Set<Roles> roles = new HashSet<>();
-            roles.add(userRole);
-            user.setRoles(roles);
+            String[] roles = {"ROLE_USER"};
             user.setPassword("user");
-            userService.saveUser(user);
+            userService.saveUser(user,roles);
         }
     }
 }

@@ -74,4 +74,6 @@ public class Roles implements GrantedAuthority {
     public int hashCode() {
         return Objects.hash(getId(), getRoleType(), getUsers());
     }
+
+
 }
