@@ -23,6 +23,12 @@ public class AdminController {
         this.userService = userService;
     }
 
+    @GetMapping("/adminPage")
+    public String showYourInfo(Principal principal, Model model) {
+        model.addAttribute("admin", userService.loadUserByUsername(principal.getName()));
+        return "adminPage";
+    }
+
     @GetMapping
     public String showAllUsers(Model model, Principal principal) {
         model.addAttribute("user"

@@ -7,12 +7,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<div th:insert="header.html::header(${user})"></div>
+<div th:insert="header.html::header(${admin})"></div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
             <div class="nav flex-column nav-pills">
-                <a class="nav-link active" href="/user">User</a>
+                <a class="nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">Admin</a>
+                <a class="nav-link active" href="/adminPage">User</a>
             </div>
         </div>
         <div class="col-md-10 bg-light">
@@ -33,10 +34,10 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td th:text="${user.name}"></td>
-                            <td th:text="${user.surname}"></td>
-                            <td th:text="${user.city}"></td>
-                            <td th:text="${user.roles}"></td>
+                            <td th:text="${admin.name}"></td>
+                            <td th:text="${admin.surname}"></td>
+                            <td th:text="${admin.city}"></td>
+                            <td th:text="${admin.roles}"></td>
                         </tr>
                         </tbody>
                     </table>
