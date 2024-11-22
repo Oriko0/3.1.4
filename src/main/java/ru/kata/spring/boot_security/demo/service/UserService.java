@@ -13,7 +13,7 @@ public interface UserService extends UserDetailsService {
 
     List<User> getAllUsers();
 
-    void saveUser(User user, String[] roles);
+    void saveUser(User user);
 
     User getUser(Integer id);
 
@@ -21,4 +21,7 @@ public interface UserService extends UserDetailsService {
 
     User findByUsername(String username);
 
+    void updateUser(User user);
+
+    void saveInit(User user);
 }

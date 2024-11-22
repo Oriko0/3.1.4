@@ -1,39 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 <div class="container">
-    <form class="form-signin" method="post" action="/login">
-        <div class="row mt-md-5 justify-content-center">
-            <div class="col-md-4">
-                <h1 class="h3 mb-3 font-weight-bold">Please sign in</h1>
-            </div>
-        </div>
-        <div class="form-row justify-content-center">
-            <div class="col-md-4">
-                <label for="username" class="sr-only">Email address</label>
-                <input id="username" name="j_username" class="form-control" placeholder="Username" required="" autofocus="">
-            </div>
-        </div>
-        <div class="form-row justify-content-center">
-            <div class="col-md-4">
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="j_password" class="form-control" placeholder="Password" required="">
-            </div>
-        </div>
-        <div class="form-row justify-content-center">
-            <div class="col-md-4">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </div>
-        </div>
-    </form>
+  <form class="form-signin" method="post" action="/login">
+    <div class="row mt-md-5 justify-content-center">
+      <div class="col-md-4">
+        <h1 class="h3 mb-3 font-weight-bold">Please sign in</h1>
+      </div>
+    </div>
+    <div class="form-row justify-content-center">
+      <div class="col-md-4">
+        <label for="username" class="sr-only">Email address</label>
+        <input id="username" name="j_username" class="form-control" placeholder="Username" required="" autofocus="">
+      </div>
+    </div>
+    <div class="form-row justify-content-center">
+      <div class="col-md-4">
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="j_password" class="form-control" placeholder="Password" required="">
+      </div>
+    </div>
+    <div class="form-row justify-content-center">
+      <div class="col-md-4">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </div>
+    </div>
+  </form>
 </div>
 </body>
 </html>

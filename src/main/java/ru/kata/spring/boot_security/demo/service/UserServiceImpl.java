@@ -2,19 +2,17 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
-
-
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,7 +22,8 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, @Lazy PasswordEncoder passwordEncoder,
+                           RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
@@ -35,14 +34,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+
     @Override
-    public void saveUser(User user, String[] roles) {
-        user.setRoles(
-                Arrays.stream(roles)
-                        .map(roleRepository::findOneByRoleType)
-                        .collect(Collectors.toSet())
-        );
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void saveUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder(10).encode(user.getPassword()));
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findOneByRoleType(user.getRoles().toString().replace("[", "").replace("]", "")));
+        user.setRoles(roles);
         userRepository.save(user);
     }
 
@@ -55,11 +53,25 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Integer id) {
         userRepository.deleteById(id);
     }
+    @Override
+    public void updateUser(User user){
+        user.setPassword(new BCryptPasswordEncoder(10).encode(user.getPassword()));
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findOneByRoleType(user.getRoles().toString().replace("[", "").replace("]", "")));
+        user.setRoles(roles);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void saveInit(User user) {
+        userRepository.save(user);
+
+    }
 
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findUserByUsername(username);
+    return userRepository.findUserByUsername(username);
     }
 
     @Override

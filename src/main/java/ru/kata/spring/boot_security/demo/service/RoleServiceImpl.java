@@ -2,11 +2,9 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kata.spring.boot_security.demo.model.Roles;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
-import java.util.List;
-import java.util.Set;
 
 
 @Service
@@ -19,18 +17,14 @@ public class RoleServiceImpl implements RoleService {
         this.roleRepository = roleRepository;
     }
 
-    @Override
-    public List<Roles> getAllRoles() {
-        return roleRepository.findAll();
-    }
 
     @Override
-    public Roles getRoleByRoleType(String type) {
+    public Role getRoleByRoleType(String type) {
         return roleRepository.findOneByRoleType(type);
     }
 
     @Override
-    public void saveRole(Roles role) {
+    public void saveRole(Role role) {
         roleRepository.save(role);
     }
 

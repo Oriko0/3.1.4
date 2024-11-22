@@ -2,10 +2,11 @@ package ru.kata.spring.boot_security.demo.model;
 
 
 
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -34,11 +35,12 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade =CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "userrole",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> roles;
+    @Cascade({CascadeType.MERGE,CascadeType.PERSIST, CascadeType.SAVE_UPDATE})
+    private Set<Role> roles;
 
     public User() {}
 
@@ -47,6 +49,15 @@ public class User implements UserDetails {
         this.surname = surname;
         this.city = city;
         this.username = username;
+    }
+
+    public  User(String name, String surname, String city, String username, String password, Set<Role> role) {
+        this.name = name;
+        this.surname = surname;
+        this.city = city;
+        this.username = username;
+        this.password = password;
+        this.roles = role;
     }
 
 
@@ -90,11 +101,11 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public Set<Roles> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Roles> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
     @Override
@@ -123,7 +134,7 @@ public class User implements UserDetails {
         StringBuilder stringRoles = new StringBuilder();
         roles
                 .stream()
-                .map(Roles::getRoleType)
+                .map(Role::getRoleType)
                 .map(role -> role.replaceAll("ROLE_", ""))
                 .forEach(role -> stringRoles.append(role).append(" "));
         return stringRoles.toString();
